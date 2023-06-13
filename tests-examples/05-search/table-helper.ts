@@ -34,62 +34,62 @@ export class TableHelper {
   }
 
   /**
-   * Returns the cell inner text based on given headerValue and rawIndex / rawHasText.
+   * Returns the cell inner text based on given headerValue and rowIndex / rowHasText.
    * @param headerValue A value / column name in the table Header.
-   * @param options A rawIndex / rawHasText parameters to find particular raw in the table. At least one parameter is mandatory.
+   * @param options A rowIndex / rowHasText parameters to find particular row in the table. At least one parameter is mandatory.
    * @returns
    */
   async getCellTextByHeaderValue(
     headerValue: string,
-    options: { rawIndex?: number; rawHasText?: string }
+    options: { rowIndex?: number; rowHasText?: string }
   ) {
     let headerIndex = (await this.getHeaderIndexByValue(headerValue)) ?? -1;
 
     const rows = this.tableLocator.locator("tbody").getByRole("row");
-    if (options?.rawIndex != null) {
+    if (options?.rowIndex != null) {
       return rows
-        .nth(options?.rawIndex)
+        .nth(options?.rowIndex)
         .getByRole("cell")
         .nth(headerIndex)
         .innerText();
-    } else if (options?.rawHasText != null) {
+    } else if (options?.rowHasText != null) {
       return rows
-        .filter({ hasText: options?.rawHasText })
+        .filter({ hasText: options?.rowHasText })
         .getByRole("cell")
         .nth(headerIndex)
         .innerText();
     } else {
-      throw new Error("Please provide a rawIndex or rawHasText value");
+      throw new Error("Please provide a rowIndex or rowHasText value");
     }
   }
 
   /**
-   * Clicking cell based on given headerValue and rawIndex / rawHasText.
+   * Clicking cell based on given headerValue and rowIndex / rowHasText.
    * @param headerValue A value / column name in the table Header.
-   * @param options A rawIndex / rawHasText parameters to find particular raw in the table. At least one parameter is mandatory.
+   * @param options A rowIndex / rowHasText parameters to find particular row in the table. At least one parameter is mandatory.
    * @returns
    */
   async clickCellByHeaderValue(
     headerValue: string,
-    options: { rawIndex?: number; rawHasText?: string }
+    options: { rowIndex?: number; rowHasText?: string }
   ) {
     let headerIndex = (await this.getHeaderIndexByValue(headerValue)) ?? -1;
 
     const rows = this.tableLocator.locator("tbody").getByRole("row");
-    if (options?.rawIndex != null) {
+    if (options?.rowIndex != null) {
       return rows
-        .nth(options?.rawIndex)
+        .nth(options?.rowIndex)
         .getByRole("cell")
         .nth(headerIndex)
         .click();
-    } else if (options?.rawHasText != null) {
+    } else if (options?.rowHasText != null) {
       return rows
-        .filter({ hasText: options?.rawHasText })
+        .filter({ hasText: options?.rowHasText })
         .getByRole("cell")
         .nth(headerIndex)
         .click();
     } else {
-      throw new Error("Please provide a rawIndex or rawHasText value");
+      throw new Error("Please provide a rowIndex or rowHasText value");
     }
   }
 }
