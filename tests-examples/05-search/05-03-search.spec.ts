@@ -4,7 +4,7 @@ import { TableHelper } from "./table-helper";
 test("Admin could user status", async ({ page }) => {
   await test.step(`STEP-1: Open Login page`, async () => {
     await page.goto(
-      "http://t2-lab_user-admin.t2.testenv.io/login?return_path=%2F"
+      "http://p-lab_user-admin.p.testenv.io/login?return_path=%2F"
     );
     await page.waitForLoadState("networkidle");
   });

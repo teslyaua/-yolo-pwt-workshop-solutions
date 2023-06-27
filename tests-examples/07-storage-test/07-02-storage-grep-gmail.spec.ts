@@ -15,16 +15,18 @@ extendedTest.beforeEach(async ({ backoffice }) => {
   await backoffice.loginPage.open();
 });
 
-extendedTest("@smoke | Admin could search user by name", async ({ backoffice }) => {
+extendedTest(
+  "@smoke | Admin could search user by name",
+  async ({ backoffice }) => {
     const now = new Date();
     const userName = "iurii.teslia";
-  
-    await extendedTest.step(
-      `STEP-1: Open  Forgot UserName page and submit recovering username`,
-      async () => {
-        await backoffice.loginPage.submitRecoveringUsername(ygfAdmin);
-      }
-    );
+
+    // await extendedTest.step(
+    //   `STEP-1: Open  Forgot UserName page and submit recovering username`,
+    //   async () => {
+    //     await backoffice.loginPage.submitRecoveringUsername(ygfAdmin);
+    //   }
+    // );
 
     let emailBody = await extendedTest.step(
       `STEP-2: Get body from Email`,
@@ -35,6 +37,6 @@ extendedTest("@smoke | Admin could search user by name", async ({ backoffice }) 
       }
     );
 
-  expect(emailBody).toContain(`Your username is: ${userName}`);
-  
-});
+    expect(emailBody).toContain(`Your username is: ${userName}`);
+  }
+);

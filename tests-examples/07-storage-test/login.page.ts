@@ -4,7 +4,7 @@ import { Admin } from "./admins";
 export const loginPage = (page: Page) => ({
   async open() {
     await page.goto(
-      "http://t2-lab_user-admin.t2.testenv.io/login?return_path=%2F"
+      "http://p-lab_user-admin.p.testenv.io/login?return_path=%2F"
     );
     await page.waitForLoadState("networkidle");
   },
@@ -19,9 +19,13 @@ export const loginPage = (page: Page) => ({
   async submitRecoveringUsername(admin: Admin) {
     await page.getByRole("link", { name: "Forgot UserName?" }).click();
     await page.waitForLoadState("networkidle");
-    await page.locator('[name="recover_user_uid[operator_id]"]').selectOption(admin.operatorName);
-    await page.locator('[name="recover_user_uid[email]"]').fill(admin.adminEmail);
+    await page
+      .locator('[name="recover_user_uid[operator_id]"]')
+      .selectOption(admin.operatorName);
+    await page
+      .locator('[name="recover_user_uid[email]"]')
+      .fill(admin.adminEmail);
     await page.getByRole("button", { name: "Submit" }).click();
     await page.getByText("Email has been sent!!").waitFor();
-  }
+  },
 });
