@@ -10,7 +10,7 @@ const extendedTest = test.extend<{ backoffice: ReturnType<typeof Backoffice> }>(
     },
   }
 );
-
+const brand = "hi_casino";
 
 extendedTest.beforeEach(async ({ backoffice }) => {
   await backoffice.loginPage.open();
@@ -18,17 +18,25 @@ extendedTest.beforeEach(async ({ backoffice }) => {
 });
 
 extendedTest("Admin could search user by name", async ({ backoffice }) => {
-  await backoffice.customersPage.searchByUserName(searchOptions.userName, "myrtice.gerlach")
+  await backoffice.customersPage.chooseBrand(brand);
+  await backoffice.customersPage.searchByUserName(
+    searchOptions.userName,
+    "myrtice.gerlach"
+  );
 });
 
 extendedTest("Admin could search user by user ID", async ({ backoffice }) => {
+  await backoffice.customersPage.chooseBrand(brand);
   await backoffice.customersPage.searchByUserName(searchOptions.id, "178717");
 });
 
-
-
-extendedTest("Admin could search user by user email", async ({ backoffice }) => {
-  await backoffice.customersPage.searchByUserName(searchOptions.email, "username_myrtice.gerlach@hi.com");
-});
-
-
+extendedTest(
+  "Admin could search user by user email",
+  async ({ backoffice }) => {
+    await backoffice.customersPage.chooseBrand(brand);
+    await backoffice.customersPage.searchByUserName(
+      searchOptions.email,
+      "username_myrtice.gerlach@hi.com"
+    );
+  }
+);

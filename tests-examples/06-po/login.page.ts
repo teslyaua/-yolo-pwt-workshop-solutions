@@ -14,5 +14,6 @@ export const loginPage = (page: Page) => ({
     await page.locator("#login_password").fill(`${admin.adminPassword}`);
     await page.getByRole("button", { name: "Log in" }).click();
     await page.waitForURL("**/users");
+    await page.waitForLoadState("networkidle");
   },
 });

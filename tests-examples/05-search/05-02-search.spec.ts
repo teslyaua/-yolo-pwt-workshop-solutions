@@ -8,6 +8,7 @@ test("Admin could search user by name", async ({ page }) => {
   await page.locator("#login_password").fill("123");
   await page.getByRole("button", { name: "Log in" }).click();
   await page.waitForURL("**/users");
+  await page.waitForLoadState("networkidle");
 
   //-------- expect.toPass
   await page.getByPlaceholder("Search by User Name").fill("myrtice.gerlach");
@@ -29,6 +30,8 @@ test("Admin could search user by user ID", async ({ page }) => {
   await page.getByPlaceholder(" ").fill("iurii.teslia");
   await page.locator("#login_password").fill("123");
   await page.getByRole("button", { name: "Log in" }).click();
+  await page.waitForURL("**/users");
+  await page.waitForLoadState("networkidle");
 
   await page.getByPlaceholder("Search by User ID").fill("178717");
   await expect(async () => {
@@ -49,10 +52,12 @@ test("Admin could search user by user email", async ({ page }) => {
   await page.getByPlaceholder(" ").fill("iurii.teslia");
   await page.locator("#login_password").fill("123");
   await page.getByRole("button", { name: "Log in" }).click();
+  await page.waitForURL("**/users");
+  await page.waitForLoadState("networkidle");
 
   await page
     .getByPlaceholder("Search by email or %email%")
-    .fill("username_myrtice.gerlach@hi.com");
+    .fill("username_myrtice.gerlach@hi.com1");
   await expect(async () => {
     await page.getByPlaceholder("Search by email or %email%").press("Enter");
 
@@ -80,12 +85,15 @@ test("Admin could search user by user email", async ({ page }) => {
 //     await page.getByPlaceholder(" ").fill(userName);
 //     await page.locator("#login_password").fill("123");
 //     await page.getByRole("button", { name: "Log in" }).click();
+//     await page.waitForURL("**/users");
+//     await page.waitForLoadState("networkidle");
 //   });
 
 //   await test.step(`STEP-3: Search for a user by email username_myrtice.gerlach1@hi.com`, async () => {
+    
 //     await page
 //       .getByPlaceholder("Search by email or %email%")
-//       .fill("username_myrtice.gerlach@hi.com");
+//       .fill("username_myrtice.gerlach@hi.com1");
 //     await expect(async () => {
 //       await page.getByPlaceholder("Search by email or %email%").press("Enter");
 
@@ -97,3 +105,17 @@ test("Admin could search user by user email", async ({ page }) => {
 //     });
 //   });
 // });
+
+// --------  choose brand
+      //  await page
+      //    .getByRole("button")
+      //    .filter({ hasText: "Brands • All" })
+      //    .nth(1)
+      //    .click();
+
+      //  await page
+      //    .getByTestId("site-filter-popover-panel")
+      //    .getByText("hi_casino")
+      //    .click();
+
+      //  await page.getByRole("button", { name: "Apply" }).click();
